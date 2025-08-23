@@ -1,0 +1,226 @@
+<nav
+  class="relative bg-gray-800 dark:bg-gray-800/50 dark:after:pointer-events-none dark:after:absolute dark:after:inset-x-0 dark:after:bottom-0 dark:after:h-px dark:after:bg-white/10"
+>
+  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div class="relative flex h-16 items-center justify-between">
+      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+        <!-- Mobile menu button-->
+        <button
+          id="mobile-menu-button"
+          type="button"
+          class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:-outline-offset-1 focus:outline-indigo-500"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+        >
+          <span class="absolute -inset-0.5"></span>
+          <span class="sr-only">Open main menu</span>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            data-slot="icon"
+            aria-hidden="true"
+            class="size-6 in-aria-expanded:hidden"
+          >
+            <path
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            data-slot="icon"
+            aria-hidden="true"
+            class="size-6 not-in-aria-expanded:hidden"
+          >
+            <path
+              d="M6 18 18 6M6 6l12 12"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+      <div
+        class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
+      >
+        <div class="flex shrink-0 items-center">
+          <img
+            src="/images/Gemini_Generated_Image_6024tt6024tt6024.png"
+            alt="Your Company"
+            class="h-10 w-auto rounded-full"
+          />
+        </div>
+        <div class="hidden sm:ml-6 sm:block">
+          <div class="flex space-x-4">
+            <!-- Current: "bg-gray-900 dark:bg-gray-950/50 text-white", Default: "text-gray-300 hover:bg-white/5 hover:text-white" -->
+            <a
+              href="/"
+              aria-current="page"
+              class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white dark:bg-gray-950/50"
+              >Dashboard</a
+            >
+            <a
+              href="#"
+              class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
+              >Team</a
+            >
+            <% if (locals.user) { %>
+            <a
+              href="/blog/add-new"
+              class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
+              >add Blog</a
+            >
+            <% } %>
+          </div>
+        </div>
+      </div>
+      <div
+        class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+      >
+        <% if (locals.user) { %>
+        <!-- Profile dropdown -->
+        <div class="relative ml-3">
+          <div>
+            <button
+              type="button"
+              class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+              id="user-menu-button"
+              aria-expanded="false"
+              aria-haspopup="true"
+            >
+              <strong
+                class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
+                ><%= user.fullName %></strong
+              >
+              <span class="absolute -inset-1.5"></span>
+              <span class="sr-only">Open user menu</span>
+
+              <img
+                class="h-8 w-8 rounded-full"
+                src="<%= user.profileImageURL %>"
+                alt=""
+              />
+            </button>
+          </div>
+          <div
+            id="user-menu"
+            class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden"
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="user-menu-button"
+            tabindex="-1"
+          >
+            <a
+              href="#"
+              class="block px-4 py-2 text-sm text-gray-700"
+              role="menuitem"
+              tabindex="-1"
+              id="user-menu-item-0"
+              >Your Profile</a
+            >
+            <a
+              href="#"
+              class="block px-4 py-2 text-sm text-gray-700"
+              role="menuitem"
+              tabindex="-1"
+              id="user-menu-item-1"
+              >Settings</a
+            >
+            <a
+              href="/user/logout"
+              class="block px-4 py-2 text-sm text-gray-700"
+              role="menuitem"
+              tabindex="-1"
+              id="user-menu-item-2"
+              >Sign out</a
+            >
+          </div>
+        </div>
+        <% } else { %>
+        <a
+          href="/user/signup"
+          class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
+          >Sign Up</a
+        >
+        <a
+          href="/user/login"
+          class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
+          >login</a
+        >
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu, show/hide based on menu state. -->
+  <div class="sm:hidden" id="mobile-menu" hidden>
+    <div class="space-y-1 px-2 pt-2 pb-3">
+      <!-- Current: "bg-gray-900 dark:bg-gray-950/50 text-white", Default:
+      "text-gray-300 hover:bg-white/5 hover:text-white" -->
+      <a
+        href="/"
+        aria-current="page"
+        class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white dark:bg-gray-950/50"
+        >Dashboard</a
+      >
+      <a
+        href="#"
+        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white"
+        >Team</a
+      >
+      <% if (locals.user) { %>
+      <a
+        href="/blog/add-new"
+        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white"
+        >Blog</a
+      >
+      <% } %>
+    </div>
+  </div>
+</nav>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const mobileMenuButton = document.getElementById("mobile-menu-button");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    if (mobileMenuButton) {
+      mobileMenuButton.addEventListener("click", () => {
+        const isExpanded =
+          mobileMenuButton.getAttribute("aria-expanded") === "true";
+        mobileMenuButton.setAttribute("aria-expanded", !isExpanded);
+        mobileMenu.hidden = isExpanded;
+      });
+    }
+
+    const userMenuButton = document.getElementById("user-menu-button");
+    const userMenu = document.getElementById("user-menu");
+
+    if (userMenuButton) {
+      userMenuButton.addEventListener("click", (event) => {
+        const isExpanded =
+          userMenuButton.getAttribute("aria-expanded") === "true";
+        userMenuButton.setAttribute("aria-expanded", !isExpanded);
+        userMenu.classList.toggle("hidden");
+        event.stopPropagation();
+      });
+
+      document.addEventListener("click", (event) => {
+        if (
+          userMenu &&
+          !userMenu.contains(event.target) &&
+          !userMenuButton.contains(event.target)
+        ) {
+          userMenu.classList.add("hidden");
+          userMenuButton.setAttribute("aria-expanded", "false");
+        }
+      });
+    }
+  });
+</script>
